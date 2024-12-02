@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advanced Expense Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/crypto-js/crypto-js.js"></script>
+</head>
+<body class="initial-page">
+  <div id="auth-overlay" class="overlay">
+    <div class="auth-container">
+      <h2>Expense Tracker</h2>
+      <!-- <p>Enter your PIN to continue:</p> -->
+      <!-- <input type="password" id="auth-pin" placeholder="Enter PIN" maxlength="6"> -->
+      <!-- <button id="auth-submit">Unlock</button> -->
+    </div>
+  </div>
+
+  <header id="language-choose" class="">
+    <h1>Choose Language</h1>
+    <button id="dark-mode-toggle">Toggle Dark Mode</button>
+    <select id="language-select">
+      <option disabled selected value> -- select an language -- </option>
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+    </select>
+  </header>
+
+  <main id="dashboard" class="display-none">
+    <aside>
+      <h3>Customize Dashboard</h3>
+      <label><input type="checkbox" data-widget="expense-form" checked> Expense Form</label>
+      <label><input type="checkbox" data-widget="expense-summary" checked> Expense Summary</label>
+      <label><input type="checkbox" data-widget="charts" checked> Charts</label>
+      <label><input type="checkbox" data-widget="gamification" checked> Gamification</label>
+    </aside>
+
+    <section id="content">
+      <!-- Expense Form -->
+      <div id="expense-form-widget" class="widget">
+        <h2>Add Expense</h2>
+        <form id="expense-form">
+          <input type="text" id="expense-name" placeholder="Expense Name" required>
+          <input type="number" id="expense-amount" placeholder="Amount ($)" required>
+          <select id="expense-category">
+            <option value="" disabled selected>Select Category</option>
+          </select>
+          <label><input type="checkbox" id="recurring-expense"> Add File</label>
+          <input type="file" id="receipt-upload" accept="image/*">
+          <button type="submit">Add Expense</button>
+        </form>
+      </div>
+
+      <!-- Expense Summary -->
+      <div id="expense-summary-widget" class="widget">
+        <h2>Expense Summary</h2>
+        <div id="summary">
+          <p>Total Expenses: $<span id="monthly-total">0</span></p>
+        </div>
+        <button id="download-summary" style="display: block; margin: 0 auto;">Download Summary</button>
+      </div>
+
+      <!-- Charts -->
+      <div id="charts-widget" class="widget">
+        <h2>Expense Charts</h2>
+        <canvas id="expense-chart" width="400" height="400"></canvas>
+      </div>
+
+      <!-- Gamification -->
+      <div id="gamification-widget" class="widget">
+        <h2>Achievements</h2>
+        <ul id="achievements">
+          <li>Track expenses daily to earn streaks!</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Expense Tracker</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
