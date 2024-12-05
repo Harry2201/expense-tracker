@@ -143,17 +143,40 @@ function updateCharts() {
 }
 
 // Export Data
-document.getElementById("download-summary").addEventListener("click", () => {
-  const blob = new Blob([JSON.stringify(expenses)], {
-    type: "application/json",
-  });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "expenses.json";
-  a.click();
-  URL.revokeObjectURL(url);
-});
+// document.getElementById("download-summary").addEventListener("click", () => {
+//   const blob = new Blob([JSON.stringify(expenses)], {
+//     type: "application/json",
+//   });
+//   const url = URL.createObjectURL(blob);
+//   const a = document.createElement("a");
+//   a.href = url;
+//   a.download = "expenses.json";
+//   a.click();
+//   URL.revokeObjectURL(url);
+// });
+
+// Ensure to include the SheetJS library in your project
+// You can add it via CDN in your HTML file:
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+function downloadExpenseSummaryAsExcel(expenseData) {
+    // Convert JSON to worksheet
+    const worksheet = XLSX.utils.json_to_sheet(expenseData);
+
+    // Create a new workbook
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Expenses");
+
+    // Generate and download the Excel file
+    XLSX.writeFile(workbook, "Expense_Summary.xlsx");
+}
+
+// Example usage
+const expenseData = [
+    { Date: "2024-12-01", Description: "Groceries", Amount: 500 },
+    { Date: "2024-12-02", Description: "Rent", Amount: 1000 },
+];
+downloadExpenseSummaryAsExcel(expenseData);
 
 // Gamification
 const achievements = document.getElementById("achievements");
